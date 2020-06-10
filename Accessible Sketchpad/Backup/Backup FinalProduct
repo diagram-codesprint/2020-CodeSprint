@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<head>
+<html>
+<body style= "
+    margin-top: 50px;">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+canvas {background: transparent}
+.numinputbox{
+    color: rgb(0, 0, 0);
+}
+
+.button {
+  display: inline-block;
+  border-radius: 2px;
+  background-color: #f4511e;
+  border: none;
+  border-radius: 10px;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 15px;
+  padding: 10px;
+  width: 120px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 25px;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+.selectbutton {
+  display: inline-block;
+  padding: 15px 50px;
+  font-size: 20px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  margin: 4px 10px;
+  color: #fff;
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 9px #999;
+}
+
+.selectbutton:hover {background-color: #3e8e41}
+
+.selectbutton:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+.smallsbutton {
+  display: inline-block;
+  padding: 10px 40px;
+  font-size: 15px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  margin: 4px 10px 15px;
+  color: #fff;
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 9px #999;
+}
+
+.smallsbutton:hover {background-color: #3e8e41}
+
+.smallsbutton:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+.block {
+  background-color: #0074D9;
+  border: 3px rgb(0,0,0);
+  color: white;
+  padding: 16px 40px; 
+  text-align: center;
+  font-size: 16px;
+  margin: 4px 30px;
+  opacity: 2.0;
+  transition: 0.3s;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer; 
+}
+.title {
+    color: #001f3f;
+    font-size: 40px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+.subtitle {
+    color: #001f3f;
+    margin: 30px 10px 20px;
+    font-size: 30px;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif 
+}
+.block:hover {
+    opacity: 0.8;
+} 
+</style>
+    <link rel="stylesheet" type="text/css" href="Styles.css">
+
+</head>
+
+</body>
+<<<<<<< HEAD
+<h1 class = "title">Draw-A-Figure </h1>
+<button class = "selectbutton" onclick="tributton()">Triangle</button>
+<button class = "selectbutton" onclick="quadbutton()">Quadrilateral</button>
+<button class = "selectbutton" onclick="conicButton()">Conic</button>
+
+<div id= "triinterface", class ="hidden">
+    <h1 class = "subtitle">What triangle?</h1>
+    <button class ="smallsbutton" onclick="displayInputEqualTri()">Equilateral Triangle </button>
+    <button class ="smallsbutton" onclick="displayInputScaleneTri()">Scalene Triangle </button>
+    <div id = "scalenetriinterface", class = "hidden">
+        <h1 class = "subtitle">Enter Side Lengths and Angle</h1>
+        <input class = "numinputbox" type = "number" id = "triLeg1" value= "triLeg1" step="10" placeholder = "Enter Length of Side 1">
+        <br>
+        <input class = "numinputbox" type = "number" id = "triLeg2" value= "triLeg2" step="10" placeholder = "Enter Length of Side 2">
+        <br>
+        <input class = "numinputbox" type = "number" id = "angle" value= "angle" list="commonangles" step="10" placeholder = "Enter Angle between Them">
+        <span class ="validity"></span>
+            <datalist id="commonangles">
+                <option value="30">
+                <option value="45"></option>
+                <option value="60"></option>
+                <option value="90"></option>
+                <option value="120"></option>
+                <option value="135"></option>
+                <option value="150"></option>
+            </datalist>
+        <br>
+        <button class = "button" type = "submit" onclick = "drawTriangle(document.getElementById('triLeg1').value, document.getElementById('triLeg2').value,document.getElementById('angle').value)" id = "btnscalenetri"><span>Draw!</span></button>
+    </div>
+    <div id = "equaltriinterface", class = "hidden">
+        <h1 class = "subtitle">Enter Side Length</h1>
+        <input type = "number" id = "triside" value = "triside" step ="10" placeholder = "Enter Length of the Side">
+        <br>
+        <button class = "button" type = "submit" onclick="drawTriangle(document.getElementById('triside').value, document.getElementById('triside').value, 60)" id = "btnequaltri"><span>Draw!</span> </button>
+=======
+<h1>Draw-A-Figure</h1>
+<button class="block" onclick="tributton()">Triangle</button>
+<button class="block" onclick="quadbutton()">Quadrilateral</button>
+<button class="block"onclick="conicButton()">Conic</button>
+
+<div id= "triinterface", class="hidden">
+    <h1>Select your Triangle</h1>
+    <button class="block" onclick="displayInputEqualTri()">Equilateral Triangle </button>
+    <button class="block" onclick="displayInputScaleneTri()">Scalene Triangle </button>
+    <div id = "scalenetriinterface", class = "hidden">
+        <input type = "number" id = "triLeg1" value= "triLeg1" placeholder = "Enter Length of Side 1">
+        <input type = "number" id = "triLeg2" value= "triLeg2" placeholder = "Enter Length of Side 2">
+        <input type = "number" id = "angle" value= "angle" placeholder = "Enter Angle between Them">
+        <br>
+        <button type = "submit" onclick="drawTriangle(document.getElementById('triLeg1').value, document.getElementById('triLeg2').value,document.getElementById('angle').value)" id = "btnscalenetri"> Click for Triangle </button>
+    </div>
+    <div id = "equaltriinterface", class = "hidden">
+        <input type = "number" id = "triside" value= "triside" placeholder = "Enter Length of the Side">
+        <br>
+        <button type = "submit" onclick="drawTriangle(document.getElementById('triside').value, document.getElementById('triside').value, 60)" id = "btnequaltri"> Click for Triangle </button>
+>>>>>>> d2acb4f07fd4870b9f4ecef1b6753c265fb00dd8
+    </div>
+</div>
+
+<div id= "quadinterface", class="hidden">
+    <h1 class = "subtitle">What Quadrilateral?</h1>
+    <!--quadrilateral (display square or rectangle buttons)-->
+    <button class="smallsbutton" onclick="displayInputSquare()">Square </button>
+    <button class="smallsbutton" onclick="displayInputRectangle()">Rectangle</button>
+
+    <div id= "sqinterface", class="hidden">
+        <h1 class = "subtitle">Enter Side Length</h1>
+        <p id="demo"></p>
+        <!--square-->
+        <input  type = "number"  id="side1s" value = "sideLength" step = "10" placeholder="Enter Length">
+        <br>
+        <button  class="button" type = "submit" onclick="drawRect(document.getElementById('side1s').value, document.getElementById('side1s').value)" id = "squarebtn"> <span>Draw!</span> </button>
+    </div>
+
+    <div id= "rectinterface", class="hidden">
+        <!--rectangle-->
+        <h1 class = "subtitle">Enter Width and Height</h1>
+        <input type = "number" id = "rectWidth" value= "rectWidth" step = "10" placeholder = "Enter Width for Rectangle">
+        <br>
+        <input type = "number" id = "rectHeight" value= "rectHeight" Step = "10" placeholder = "Enter Height for Rectangle">
+        <br>
+        <button class = "button" type = "submit" onclick="drawRect(document.getElementById('rectWidth').value, document.getElementById('rectHeight').value)" id = "btnRect"> <span>Draw!</span> </button>
+    </div>
+
+</div>
+
+<div id= "conicinterface", class="hidden">
+    <h1 class = "subtitle">What Conic?</h1>
+    <button class="smallsbutton" onclick="displayInputCircle()">Circle</button>
+    <button class="smallsbutton" onclick="displayInputEllipse()">Ellipse</button>
+
+    <div id= "circinterface", class="hidden"> 
+        <!--circle-->
+        <h1 class = "subtitle">Enter Radius</h1>
+        <input type = "number" id = "radius" value= "radius" step = "2" placeholder = "Enter the Radius"> 
+        <br>
+        <button class = "button" type = submit onclick="drawCircle(document.getElementById('radius').value)" id = "btn1"> <span>Draw!</span> </button> 
+    </div>
+
+    <div id= "ellipseinterface", class="hidden"> 
+        <!--ellipse-->
+        <h1 class = "subtitle">Enter Radii</h1>
+        <input type = "number" id = "majorRadius" value= "majorRadius" step = "2" placeholder = "Enter the Major-Axis Radius"> 
+        <br>
+        <input type = "number" id = "minorRadius" value= "minorRadius" step = "2" placeholder = "Enter the Minor-Axis Radius"> 
+        <br>
+        <button class = "button" type = submit onclick="drawEllipse(document.getElementById('majorRadius').value, document.getElementById('minorRadius').value)" id = "ellipsebtn"> <span>Draw!</span> </button> 
+    </div>
+</div>
+
+<br>
+<canvas></canvas>
+<script src="DrawFigures.js"></script>
+<script src="Interface_buttons.js"></script>
+</body>
+</html> 

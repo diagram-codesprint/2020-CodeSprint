@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<script src="Tangia's testing website.js"></script>
+<html>
+<body>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+.block {
+  display: block;
+  width: 20%;
+  border: 10 rgb(0, 0, 0);
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+  padding: 8px 1px;
+  font-size: 13px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.block:hover {
+  background-color: #ddd;
+  color: black;
+}
+</style>
+</head>
+<body>
+
+<h1>Select your triangle</h1>
+<p></p>
+
+<button class="block" 
+onclick="Right = 1, Equiv = 0, Iso = 0">Right Triangle
+
+</button>
+<button class="block">Equilateral Triangle</button>
+<button class="block">Isosceles Triangle</button>
+
+    <h1>Input for Triangle:</h1>
+    <form action="/action_page.php">
+        Side 1: <input type="text" name="fname"><br>
+        Side 2: <input type="text" name="lname"><br>
+        <input type="submit" value="Submit">
+      </form>
+</body>

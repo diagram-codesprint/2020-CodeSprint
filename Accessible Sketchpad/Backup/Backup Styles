@@ -1,0 +1,23 @@
+
+body {
+    text-align: center;
+    background-color: #39CCCC;
+  }
+  
+  div {
+    margin-top: 15px;
+  }
+  
+  .image-section {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .section-style {
+    margin-right: 25px;
+    margin-left: 25px;
+    background-color: white;
+  }
+
+.hidden{
+  display: none;}

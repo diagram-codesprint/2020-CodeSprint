@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Drawing Example</title>
+    <style type="test/css"> 
+        canvas { border: 1px solid black;
+        background: red;
+        }
+        body { margin: 0; }
+    </style>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <script type = "text/JavaScript" src = "drawing.js"></script>
+    
+    <!-- document.getElementById("radius").value -->
+</head>
+<body>
+    <h1>Select your polygon</h1>
+
+    <button class="block" onclick="displayInputSquare()">Square </button>
+    <button class="block" onclick="displayInputRectangle()">Rectangle</button>
+    <button class="block" onclick="displayInputTriangle()">Triangle</button>
+
+
+    <p id="demo"></p>
+    <!--square-->
+    <input class="hidden" type = "number"  id="side1s" value = "sideLength" placeholder="Enter Length">
+    <button class = "hidden" type = "submit" onclick="drawRect(document.getElementById('side1s').value, document.getElementById('side1s').value)" id = "squarebtn"> Click to Enter </button>
+
+    <!--rectangle-->
+    <input class="hidden" type = "number" id="side1r" value= "rectWidth" placeholder="Enter Width for Rectangle"> 
+    <input class="hidden" type = "number" id="side2r" value= "rectHeight" placeholder="Enter Height for Rectangle"> 
+    <br>
+    <button class="hidden" type = "submit" onclick="drawRect(document.getElementById('side1r').value, document.getElementById('side2r').value)" id = "btnRect"> Click for rectangle </button>
+    
+    <!-- triangle -->
+    <input class="hidden" type = "number" id="triside1" value= "triside1" placeholder="Enter Side 1 for Triangle"> 
+    <input class="hidden" type = "number" id="triside2" value= "triside2" placeholder="Enter Side 2 for Triangle"> 
+    <input class="hidden" type = "number" id="tri-angle" value= "tri-angle" placeholder="Enter Angle for Rectangle"> 
+
+    <button class="hidden" type = "submit" onclick="drawTriangle(document.getElementById('triside1').value, document.getElementById('triside2').value, 
+    document.getElementById('tri-angle').value)" id = "btnTri"> Click for triangle </button>
+
+
+    <!-- <input type = "number" id = "rectWidth" value= "rectWidth" placeholder = "Enter Width for Rectangle"> -->
+    <!-- <input type = "number" id = "rectHeight" value= "rectHeight" placeholder = "Enter Height for Rectangle"> -->
+
+    <!-- <input type = "number" id = "radius" value= "radius" placeholder = "Enter the Radius"> -->
+
+
+    <br>
+    <!-- <button type = submit onclick="drawCircle(document.getElementById('radius').value)" id = "btn1"> Click when ready </button> -->
+
+    <!-- <button type = submit onclick="drawRect(document.getElementById('rectWidth').value, document.getElementById('rectHeight').value)" id = "btnRect"> Click for rectangle </button> -->
+   
+    <br>
+    <br>
+    <br>
+
+    <canvas></canvas>
+    <script src="./JavaScript/index.js"></script>
+    <script src = "./JavaScript/drawing.js"></script>
+
+</body>
+</html>

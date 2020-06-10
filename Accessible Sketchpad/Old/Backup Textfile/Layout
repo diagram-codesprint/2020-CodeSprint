@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<script src="Tangia's testing website.js"></script>
+<head>
+<html>
+<body>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+.block {
+  background-color: #f4511e;
+  border: 3px rgb(0,0,0);
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  font-size: 16px;
+  margin: 4px 2px;
+  opacity: 0.6;
+  transition: 0.3s;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.block:hover 
+    hover {opacity: 1}
+    </style>
+    <link rel="stylesheet" type="text/css" href="Styles.css">
+</head>
+
+</body>
+<button class="block"
+onclick= "trianglefunction()">Triangle</button>
+<div id="myDIV"></div>
+<button class="block">Rectangle</button>
+<button class="block"onclick= drawCircle()>Circle</button>
+
+
+<h1>Select your triangle</h1>
+<button class="block" 
+onclick="//myfunction">Right Triangle
+
+</button>
+<button class="block" class = "hidden">Equilateral Triangle</button>
+<button class="block" class = "hidden"> Isosceles Triangle</button>
+
+
+
+    <h1>Input for Triangle:</h1>
+    <form action="/action_page.php" class = "hidden">
+        Side 1: <input type="text" name="fname"><br>
+        Side 2: <input type="text" name="lname"><br>
+        <input type="submit" value="Submit">
+      </form>
+</body>
+</html>  

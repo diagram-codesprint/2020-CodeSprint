@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Math Sketchpad</title>
+        <link rel="stylesheet" type="text/css" href="tab/tabs.css">
+        <link rel="stylesheet" type="text/css" href="Styles.css">
+    </head>
+<body>
+
+<h1>Math Sketchpad</h1>
+<div id="sketchArea">
+    <h2>Sketch Area</h2>
+    <canvas></canvas>
+</div>
+    
+<div class="tabs">
+  <div role="tablist" aria-label="Shapes">
+    <button role="tab"
+            aria-selected="true"
+            aria-controls="triangle-tab"
+            id="nils">
+      Triangle
+    </button>
+    <button role="tab"
+            aria-selected="false"
+            aria-controls="quadrilateral-tab"
+            id="quadrilateral"
+            tabindex="-1">
+      Quadrilateral
+    </button>
+    <button role="tab"
+            aria-selected="false"
+            aria-controls="conic-tab"
+            id="conic"
+            tabindex="-1">
+      Conic
+    </button>
+  </div>
+  <div tabindex="0"
+       role="tabpanel"
+       id="triangle-tab"
+       aria-labelledby="triangle">
+    
+      <h3>Select a Type of Triangle</h3>
+    <button class ="smallsbutton" onclick="displayInputEqualTri()">Equilateral Triangle </button>
+    <button class ="smallsbutton" onclick="displayInputScaleneTri()">Scalene Triangle </button>
+    <div id = "scalenetriinterface", class = "hidden">
+        <h1 class = "subsubtitle">Enter Side Lengths and Angle</h1>
+        <input class = "numinputbox" type = "number" id = "triLeg1" value= "triLeg1" step="10" placeholder = "Enter Length of Side 1">
+        <br>
+        <input class = "numinputbox" type = "number" id = "triLeg2" value= "triLeg2" step="10" placeholder = "Enter Length of Side 2">
+        <br>
+        <input class = "numinputbox" type = "number" id = "angle" value= "angle" list="commonangles" step="10" placeholder = "Enter Angle between Them">
+        <span class ="validity"></span>
+        <p class = "gridtitle"> Grid Size - Each Square is 5 units</p>
+    <input type="range" min="1" max="11" value="6" class="slider" onchange="changeGridFactor(value)" id="myRange">
+    <br>
+            <datalist id="commonangles">
+                <option value="30">
+                <option value="45"></option>
+                <option value="60"></option>
+                <option value="90"></option>
+                <option value="120"></option>
+                <option value="135"></option>
+                <option value="150"></option>
+            </datalist>
+        <br>
+        <button class = "button" type = "submit" onclick = "drawTriangle(document.getElementById('triLeg1').value, document.getElementById('triLeg2').value,document.getElementById('angle').value)" id = "btnscalenetri"><span>Draw!</span></button>
+    </div>
+    <div id = "equaltriinterface", class = "hidden">
+        <h1 class = "subsubtitle">Enter Side Length</h1>
+        <input type = "number" id = "triside" value = "triside" step ="10" placeholder = "Enter Length of the Side">
+        
+        <br>
+        <p class = "gridtitle"> Grid Size - Each Square is 5 units</p>
+        <input type="range" min="1" max="11" value="6" class="slider" onchange="changeGridFactor(value)" id="myRange">
+        <br>
+        <button class = "button" type = "submit" onclick="drawTriangle(document.getElementById('triside').value, document.getElementById('triside').value, 60, true)" id = "btnequaltri"><span>Draw!</span> </button>
+       
+    </div>
+      
+  </div>
+  <div tabindex="0"
+       role="tabpanel"
+       id="quadrilateral-tab"
+       aria-labelledby="quadrilateral"
+       hidden="">
+    <h3>Select a Type of Quadrilateral</h3>
+    <!--quadrilateral (display square or rectangle buttons)-->
+    <button class="smallsbutton" onclick="displayInputSquare()">Square </button>
+    <button class="smallsbutton" onclick="displayInputRectangle()">Rectangle</button>
+
+    <div id= "sqinterface", class="hidden">
+        <h1 class = "subsubtitle">Enter Side Length</h1>
+        <p id="demo"></p>
+        <!--square-->
+        <input  type = "number"  id="side1s" value = "sideLength" step = "10" placeholder="Enter Length">
+        <br>
+        <p class = "gridtitle"> Grid Size - Each Square is 5 units</p>
+    <input type="range" min="1" max="11" value="6" class="slider" onchange="changeGridFactor(value)" id="myRange">
+    <br>
+        <button  class="button" type = "submit" onclick="drawRect(document.getElementById('side1s').value, document.getElementById('side1s').value)" id = "squarebtn"> <span>Draw!</span> </button>
+        
+    </div>
+
+    <div id= "rectinterface", class="hidden">
+        <!--rectangle-->
+        <h1 class = "subsubtitle">Enter Width and Height</h1>
+        <input type = "number" id = "rectWidth" value= "rectWidth" step = "10" placeholder = "Enter Width for Rectangle">
+        <br>
+        <input type = "number" id = "rectHeight" value= "rectHeight" Step = "10" placeholder = "Enter Height for Rectangle">
+        <br>
+        <p class = "gridtitle"> Grid Size - Each Square is 5 units</p>
+    <input type="range" min="1" max="11" value="6" class="slider" onchange="changeGridFactor(value)" id="myRange">
+    <br>
+        <button class = "button" type = "submit" onclick="drawRect(document.getElementById('rectWidth').value, document.getElementById('rectHeight').value)" id = "btnRect"> <span>Draw!</span> </button>
+        
+    </div>
+  </div>
+  <div tabindex="0"
+       role="tabpanel"
+       id="conic-tab"
+       aria-labelledby="conic"
+       hidden="">
+    <h3>Select a Type of Cone</h3>
+    <button class="smallsbutton" onclick="displayInputCircle()">Circle</button>
+    <button class="smallsbutton" onclick="displayInputEllipse()">Ellipse</button>
+
+    <div id= "circinterface", class="hidden"> 
+        <!--circle-->
+        <h1 class = "subsubtitle">Enter Radius</h1>
+        <input type = "number" id = "radius" value= "radius" step = "2" placeholder = "Enter the Radius"> 
+        <br>
+        <p class = "gridtitle"> Grid Size - Each Square is 5 units</p>
+    <input type="range" min="1" max="11" value="6" class="slider" onchange="changeGridFactor(value)" id="myRange">
+    <br>
+        <button class = "button" type = submit onclick="drawCircle(document.getElementById('radius').value)" id = "btn1"> <span>Draw!</span> </button> 
+        
+    </div>
+
+    <div id= "ellipseinterface", class="hidden"> 
+        <!--ellipse-->
+        <h1 class = "subsubtitle">Enter Radii</h1>
+        <input type = "number" id = "majorRadius" value= "majorRadius" step = "2" placeholder = "Enter the Major-Axis Radius"> 
+        <br>
+        <input type = "number" id = "minorRadius" value= "minorRadius" step = "2" placeholder = "Enter the Minor-Axis Radius"> 
+        <br>
+        <p class = "gridtitle"> Grid Size - Each Square is 5 units</p>
+    <input type="range" min="1" max="11" value="6" class="slider" onchange="changeGridFactor(value)" id="myRange">
+    <br>
+        <button class = "button" type = submit onclick="drawEllipse(document.getElementById('majorRadius').value, document.getElementById('minorRadius').value)" id = "ellipsebtn"> <span>Draw!</span> </button> 
+        
+    </div>
+  </div>
+</div>
+
+<script src="tab/tabs.js"></script>
+<script src="DrawFigures.js"></script>
+<script src="Interface_buttons.js"></script>
+
+</body>
+</html>
