@@ -72,8 +72,8 @@ function makePolygon(inputX, inputY)
 }
 
 function update(inputSides, inputAngles) {
-        super.sides = inputSides;
-        super.angles = inputAngles;
+        this.sides = inputSides;
+        this.angles = inputAngles;
         draw();
     }
 
