@@ -55,10 +55,32 @@ function drawGrid()
 }
 
 // Clears the canvas
-function clearCanvas()
+function clearDrawWindow()
 {
     c.clearRect(0, 0, canvas.width, canvas.height);
 }
+
+
+//General Function to draw Polygon. Dynamic behavior based on number of sides and input angles
+function makePolygon(inputX, inputY)
+{
+    this.xPos = parseInt(canvas.width) / 2;
+    this.yPos = parseInt(canvas.height) / 2;
+
+    this.sides = 3;
+    this.angles = [60.0, 60.0, 60.0];
+
+    this.update = function(inputSides, inputAngles){
+        super.sides = inputSides;
+        super.angles = inputAngles;
+        draw();
+    }
+
+
+}
+
+function draw()
+
 
 //Draw the circle with the input from the user
 function drawCircle(radius)
@@ -73,7 +95,7 @@ function drawCircle(radius)
     }
     else if (radius > 0)
     {
-        c.clearRect(0, 0, canvas.width, canvas.height);
+        clearDrawWindow();
         drawGrid();
         c.fillText("Radius = " + radius, gridFactor * (radius + xPos) + 10, yPos * gridFactor);
         
