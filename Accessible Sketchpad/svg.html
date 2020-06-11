@@ -1,0 +1,59 @@
+<html>
+<head>
+<style>
+.svg-area {
+width: 250px;
+height: 250px;
+}
+</style>
+
+<script>
+
+var svgCircle;
+
+function getRadius() {
+return document.getElementById('radius').value;
+}
+
+function getCenterX() {
+return 50;
+}
+
+function getCenterY() {
+return 50;
+}
+
+function drawCircle() {
+var sketchpad = document.getElementById('sketchpad');
+svgCircle = `
+<svg id="svg-area" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="${getCenterX()}" cy="${getCenterY()}" r="${getRadius()}"/>
+</svg>
+`;
+sketchpad.innerHTML = svgCircle;
+}
+
+</script>
+<title>SVG Version of Drawing Sketchpad</title>
+</head>
+<body>
+
+<h2>Sketchpad</h2>
+<div id="sketchpad">
+
+</div>
+
+<h2>Drawing Controls</h2>
+<div id="controls">
+<input id="radius" type="range" />
+<button onClick="drawCircle()">
+Draw
+</button>
+</div>
+<h2>Options</h2>
+<div id="options">
+
+</div>
+
+</body>
+</html>
