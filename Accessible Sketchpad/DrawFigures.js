@@ -69,18 +69,18 @@ function makePolygon(inputX, inputY)
 
     this.sides = 3;
     this.angles = [60.0, 60.0, 60.0];
+}
 
-    this.update = function(inputSides, inputAngles){
+function update(inputSides, inputAngles) {
         super.sides = inputSides;
         super.angles = inputAngles;
         draw();
     }
 
 
+function draw() {
+// no-op
 }
-
-function draw()
-
 
 //Draw the circle with the input from the user
 function drawCircle(radius)
