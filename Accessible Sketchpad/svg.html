@@ -1,78 +1,157 @@
-<html>
-<head>
-<style>
-svg {
-display: block;
-width: 500px;
-height: 500px;
-}
-</style>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      svg {
+        display: block;
+        width: 500px;
+        height: 500px;
+        fill: none;
+      }
+    </style>
 
-<script>
-class Circle {
-constructor() {
-this.currentShape = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-this.currentShape.setAttribute('id', 'current-shape');
-this.currentShape.setAttribute( 'tabindex', '0');
-this.currentShape.setAttribute('role', 'img');
-this.currentShape.setAttribute('aria-roledescription', 'circle');
-document.getElementById('sketchpad').appendChild(this.currentShape);
-this.draw();
-}
+    <script src="Shapes/Circle.js"></script>
+    <script>
+      const CURRENT_ID = "current-shape";
+      let sketchpad;
+      let inputCenterX;
+      let inputCenterY;
+      let inputRadius;
+      let currentCircle;
 
-get radius() {
-return document.getElementById('radius').value;
-}
+      const getRandomColor = () => {
+        var letters = "0123456789ABCDEF";
+        var color = "#";
+        for (var i = 0; i < 6; i++) {
+          color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+      };
 
-get centerX() {
-return document.getElementById('centerX').value;
-}
+      const keyboardMove = (e) => {
+        let input;
+        let delta;
+        const multiplier = e.shiftKey ? 5 : 1;
+        switch (e.key) {
+          case "ArrowUp":
+            delta = -1;
+            input = inputCenterY;
+            break;
+          case "ArrowRight":
+            delta = 1;
+            input = inputCenterX;
+            break;
+          case "ArrowDown":
+            delta = 1;
+            input = inputCenterY;
+            break;
+          case "ArrowLeft":
+            delta = -1;
+            input = inputCenterX;
+            break;
+          case "=":
+          case "+":
+            input = inputRadius;
+            delta = 1;
+            break;
+          case "-":
+          case "_":
+            input = inputRadius;
+            delta = -1;
+            break;
+        }
+        if (input && delta) {
+          input.value = Math.min(
+            input.max,
+            Math.max(input.min, parseInt(input.value, 10) + delta * multiplier)
+          );
+          currentCircle.draw({ [input.id]: input.value });
+        }
+      };
 
-get centerY() {
-return document.getElementById('centerY').value;
-}
+      const setCurrent = (circle) => {
+        sketchpad.querySelector("title").textContent = circle.label;
+        inputCenterX.value = circle.centerX;
+        inputCenterY.value = circle.centerY;
+        inputRadius.value = circle.radius;
+        currentCircle = circle;
+      };
 
-draw() {
-this.currentShape.setAttribute('aria-label', `radius of ${this.radius} at (${this.centerX}, ${this.centerY}`);
-this.currentShape.setAttribute('cx', `${this.centerX}`);
-this.currentShape.setAttribute('cy', `${this.centerY}`);
-this.currentShape.setAttribute('r', `${this.radius}`);
-}
-}
+      const createCircle = () => {
+        const circle = Circle.create(sketchpad, {
+          centerX: inputCenterX.value,
+          centerY: inputCenterY.value,
+          radius: inputRadius.value,
+        });
+        circle.shape.id = CURRENT_ID;
+        circle.shape.setAttribute("style", `color: ${getRandomColor()}`);
+        circle.shape.addEventListener("keydown", keyboardMove);
+        circle.shape.addEventListener("focus", () => setCurrent(circle));
+        setCurrent(circle);
+      };
 
-var circle;
-window.onload = function() {
-circle = new Circle();
-};
+      function onInput() {
+        currentCircle.draw({ [this.id]: this.value });
+      }
 
-function onInput() {
-circle.draw();
-}
+      function addShape() {
+        currentCircle.shape.id = null;
+        createCircle();
+      }
 
-function addShape() {
-circle.currentShape.removeAttribute('id');
-circle = new Circle();
-}
-</script>
-<title>SVG Version of Drawing Sketchpad</title>
-</head>
-<body>
-<h2 id="sketchpad-label">Sketchpad</h2>
-<svg id="sketchpad" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-</svg>
+      window.onload = () => {
+        sketchpad = document.getElementById("sketchpad");
+        inputCenterX = document.getElementById("centerX");
+        inputCenterY = document.getElementById("centerY");
+        inputRadius = document.getElementById("radius");
+        createCircle();
+      };
+    </script>
+    <title>SVG Version of Drawing Sketchpad</title>
+  </head>
+  <body>
+    <h2 id="sketchpad-label">Sketchpad</h2>
+    <svg
+      id="sketchpad"
+      viewBox="0 0 100 100"
+      xmlns="http://www.w3.org/2000/svg"
+    ><title></title></svg>
 
-<h2>Drawing Controls</h2>
-<div id="controls">
-<form >
-<label for="radius">Radius</label>
-<input oninput="onInput()" id="radius" type="number" min="0" max="100" value="25" />
-<label for="centerX">Center X</label>
-<input oninput="onInput()" id="centerX" type="number" min="0" max="100" value="50" />
-<label for="centerY">Center Y</label>
-<input oninput="onInput()" id="centerY" type="number" min="0" max="100" value="50" />
+    <h2>Drawing Controls</h2>
+    <div id="controls">
+      <form>
+        <label for="radius">Radius</label>
+        <input
+          oninput="onInput.call(this)"
+          id="radius"
+          type="number"
+          min="0"
+          max="100"
+          value="25"
+        />
+        <label for="centerX">Center X</label>
+        <input
+          oninput="onInput.call(this)"
+          id="centerX"
+          type="number"
+          min="0"
+          max="100"
+          value="50"
+        />
+        <label for="centerY">Center Y</label>
+        <input
+          oninput="onInput.call(this)"
+          id="centerY"
+          type="number"
+          min="0"
+          max="100"
+          value="50"
+        />
 
-<button onClick="addShape" type="button">Save and Add Another</button>
-</form>
-</div>
-</body>
+        <button onClick="addShape()" type="button">Save and Add Another</button>
+      </form>
+    </div>
+  </body>
 </html>
