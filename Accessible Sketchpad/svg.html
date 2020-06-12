@@ -1,59 +1,78 @@
 <html>
 <head>
 <style>
-.svg-area {
-width: 250px;
-height: 250px;
+svg {
+display: block;
+width: 500px;
+height: 500px;
 }
 </style>
 
 <script>
+class Circle {
+constructor() {
+this.currentShape = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+this.currentShape.setAttribute('id', 'current-shape');
+this.currentShape.setAttribute( 'tabindex', '0');
+this.currentShape.setAttribute('role', 'img');
+this.currentShape.setAttribute('aria-roledescription', 'circle');
+document.getElementById('sketchpad').appendChild(this.currentShape);
+this.draw();
+}
 
-var svgCircle;
-
-function getRadius() {
+get radius() {
 return document.getElementById('radius').value;
 }
 
-function getCenterX() {
-return 50;
+get centerX() {
+return document.getElementById('centerX').value;
 }
 
-function getCenterY() {
-return 50;
+get centerY() {
+return document.getElementById('centerY').value;
 }
 
-function drawCircle() {
-var sketchpad = document.getElementById('sketchpad');
-svgCircle = `
-<svg id="svg-area" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-  <circle cx="${getCenterX()}" cy="${getCenterY()}" r="${getRadius()}"/>
-</svg>
-`;
-sketchpad.innerHTML = svgCircle;
+draw() {
+this.currentShape.setAttribute('aria-label', `radius of ${this.radius} at (${this.centerX}, ${this.centerY}`);
+this.currentShape.setAttribute('cx', `${this.centerX}`);
+this.currentShape.setAttribute('cy', `${this.centerY}`);
+this.currentShape.setAttribute('r', `${this.radius}`);
+}
 }
 
+var circle;
+window.onload = function() {
+circle = new Circle();
+};
+
+function onInput() {
+circle.draw();
+}
+
+function addShape() {
+circle.currentShape.removeAttribute('id');
+circle = new Circle();
+}
 </script>
 <title>SVG Version of Drawing Sketchpad</title>
 </head>
 <body>
-
-<h2>Sketchpad</h2>
-<div id="sketchpad">
-
-</div>
+<h2 id="sketchpad-label">Sketchpad</h2>
+<svg id="sketchpad" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+</svg>
 
 <h2>Drawing Controls</h2>
 <div id="controls">
-<input id="radius" type="range" />
-<button onClick="drawCircle()">
-Draw
-</button>
-</div>
-<h2>Options</h2>
-<div id="options">
+<form >
+<label for="radius">Radius</label>
+<input oninput="onInput()" id="radius" type="number" min="0" max="100" value="25" />
+<label for="centerX">Center X</label>
+<input oninput="onInput()" id="centerX" type="number" min="0" max="100" value="50" />
+<label for="centerY">Center Y</label>
+<input oninput="onInput()" id="centerY" type="number" min="0" max="100" value="50" />
 
+<button onClick="addShape" type="button">Save and Add Another</button>
+</form>
 </div>
-
 </body>
 </html>
